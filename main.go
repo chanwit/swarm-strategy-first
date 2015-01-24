@@ -1,7 +1,8 @@
 package main
 
 import (
-	"github.com/chanwit/tentacle"
+	"github.com/docker/swarm/common"
+	"github.com/docker/swarm/scheduler/strategy/plugin"
 	"github.com/samalba/dockerclient"
 )
 
@@ -11,10 +12,10 @@ func (s *FirstOnlyStrategy) Initialize() error {
 	return nil
 }
 
-func (s *FirstOnlyStrategy) PlaceContainer(config *dockerclient.ContainerConfig, nodes []*tentacle.Node) (*tentacle.Node, error) {
+func (s *FirstOnlyStrategy) PlaceContainer(config *dockerclient.ContainerConfig, nodes []*common.Node) (*common.Node, error) {
 	return nodes[0], nil
 }
 
 func main() {
-	tentacle.Run(&FirstOnlyStrategy{})
+	plugin.Run(&FirstOnlyStrategy{})
 }
